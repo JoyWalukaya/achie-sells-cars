@@ -28,7 +28,7 @@ const Home = () => {
 
                 <div className='home-socials'>
                     
-                      <a  href='https://tiktok.com/@achiesellscars'
+                      <a  href='https://www.tiktok.com/@simply_achie?is_from_webapp=1&sender_device=pc'
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -39,7 +39,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                      <a  href='https://instagram.com/achiesellscars'
+                      <a  href='https://www.instagram.com/simply_achie/?utm_source=ig_web_button_share_sheet'
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -50,7 +50,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                       <a href='https://wa.me/254700000000'
+                       <a href='https://wa.me/254792504919'
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -61,7 +61,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                      <a  href='tel:+254700000000'
+                      <a  href='tel:+254792504919'
                         className='home-social'
                         title='Call Us'
                     >
