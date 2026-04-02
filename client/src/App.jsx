@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
@@ -11,9 +11,12 @@ import SavedCars from './pages/SavedCars.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 
 function App() {
+    const location = useLocation()
+    const isHome = location.pathname === '/'
+
     return (
         <div className='app'>
-            <Navbar />
+            <Navbar isHome={isHome} />
             <main className='main-content'>
                 <Routes>
                     <Route path='/' element={<Home />} />
@@ -33,7 +36,7 @@ function App() {
                     } />
                 </Routes>
             </main>
-            <Footer />
+            {!isHome && <Footer />}
         </div>
     )
 }

@@ -6,8 +6,11 @@ import cors from 'cors'
 import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
 import connectDB from './config/db.js'
+import { configureCloudinary } from './config/cloudinary.js'
 import authRoutes from './routes/auth.routes.js'
 import carRoutes from './routes/car.routes.js'
+
+configureCloudinary()
 
 const app = express()
 

@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import { useTheme } from '../context/ThemeContext.jsx'
 import logo from '../assets/logo.png'
 
-const Navbar = () => {
+const Navbar = ({ isHome }) => {
     const { isLoggedIn, isAdmin, user, logout } = useAuth()
+    const { darkMode, toggleTheme } = useTheme()
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -12,30 +14,60 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='navbar'>
-            <div className='navbar-container'>
-                <Link to='/' className='navbar-logo'>
-    <img src={logo} alt='Achie Sells Cars' style={{ height: '65px', objectFit: 'contain' }} />
-</Link>
+        <nav className={`navbar ${isHome ? 'navbar-home' : 'navbar-page'}`}>
+            <div className='navbar-inner'>
+                <div className='navbar-left'>
+                    <Link to='/'>
+                        <img
+                            src={logo}
+                            alt='Achie Sells Cars'
+                            className='navbar-logo'
+                        />
+                    </Link>
+                    <div className='navbar-links'>
+                        <Link to='/'>Home</Link>
+                        <Link to='/cars'>Cars</Link>
+                        <Link to='/contact'>Contact</Link>
+                        {isLoggedIn && (
+                            <Link to='/saved'>Saved</Link>
+                        )}
+                    </div>
+                </div>
 
-                <div className='navbar-links'>
-                    <Link to='/cars'>Browse Cars</Link>
+                <div className='navbar-right'>
+                    <button
+                        className='theme-toggle'
+                        onClick={toggleTheme}
+                        title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                    >
+                        {darkMode ? '☀️' : '🌙'}
+                    </button>
 
                     {isLoggedIn ? (
                         <>
-                            <Link to='/saved'>Saved Cars</Link>
+                            <span className='navbar-greeting'>
+                                Hi, {user.name.split(' ')[0]}
+                            </span>
                             {isAdmin && (
-                                <Link to='/admin'>Admin</Link>
+                                <Link to='/admin' className='navbar-admin-btn'>
+                                    Admin
+                                </Link>
                             )}
-                            <div className='navbar-user'>
-                                <span>Hi, {user.name.split(' ')[0]}</span>
-                                <button onClick={handleLogout}>Logout</button>
-                            </div>
+                            <button
+                                className='navbar-btn navbar-btn-outline'
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
                         </>
                     ) : (
                         <>
-                            <Link to='/login'>Login</Link>
-                            <Link to='/register' className='navbar-register'>Register</Link>
+                            <Link to='/login' className='navbar-btn navbar-btn-ghost'>
+                                Login
+                            </Link>
+                            <Link to='/register' className='navbar-btn navbar-btn-solid'>
+                                Register
+                            </Link>
                         </>
                     )}
                 </div>

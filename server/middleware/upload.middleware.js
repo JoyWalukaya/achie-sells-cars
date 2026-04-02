@@ -49,7 +49,8 @@ export const uploadImages = (req, res, next) => {
             req.uploadedImages = await Promise.all(uploadPromises)
             next()
         } catch (error) {
-            res.status(500).json({ message: 'Image upload failed' })
-        }
+    console.log('Upload error:', error)
+    res.status(500).json({ message: 'Image upload failed' })
+}
     })
 }
