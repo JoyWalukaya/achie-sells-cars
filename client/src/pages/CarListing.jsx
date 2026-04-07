@@ -53,10 +53,6 @@ const CarListing = () => {
 
     return (
         <div className='page-container'>
-            <h1 className='page-title'>Browse Cars</h1>
-            <p style={{ color: 'var(--text-light)', marginBottom: '1.5rem' }}>
-                {totalCars} cars available
-            </p>
 
             <div className='listing-layout'>
                 <Filters

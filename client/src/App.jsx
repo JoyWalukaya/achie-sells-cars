@@ -9,6 +9,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import SavedCars from './pages/SavedCars.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
+import Contact from './pages/Contact.jsx'
 
 function App() {
     const location = useLocation()
@@ -34,6 +35,7 @@ function App() {
                             <AdminDashboard />
                         </ProtectedRoute>
                     } />
+                    <Route path='/contact' element={<Contact />} />
                 </Routes>
             </main>
             {!isHome && <Footer />}

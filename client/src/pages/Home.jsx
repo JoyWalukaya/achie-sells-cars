@@ -19,6 +19,11 @@ const Home = () => {
             <div className='home-overlay'></div>
 
             <div className='home-bottom'>
+                <div className='home-brand'>
+                    <h1 className='home-brand-name'>Achie Motors</h1>
+                    <p className='home-brand-tagline'>Luxury Cars. Exceptional Service.</p>
+                </div>
+
                 <button
                     className='home-find-btn'
                     onClick={() => navigate('/cars')}
@@ -28,7 +33,7 @@ const Home = () => {
 
                 <div className='home-socials'>
                     
-                      <a  href='https://www.tiktok.com/@simply_achie?is_from_webapp=1&sender_device=pc'
+                       <a href='https://www.tiktok.com/@simply_achie?is_from_webapp=1&sender_device=pc'
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -39,7 +44,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                      <a  href='https://www.instagram.com/simply_achie/?utm_source=ig_web_button_share_sheet'
+                       <a href='https://www.instagram.com/simply_achie/?utm_source=ig_web_button_share_sheet'
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -61,7 +66,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                      <a  href='tel:+254792504919'
+                       <a href='tel:+254792504919'
                         className='home-social'
                         title='Call Us'
                     >
