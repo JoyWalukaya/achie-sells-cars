@@ -95,10 +95,10 @@ const Filters = ({ onFilter, initialFilters = {} }) => {
                             <div className='form-group'>
                                 <label>Condition</label>
                                 <select name='condition' value={filters.condition} onChange={handleChange}>
-                                    <option value=''>All</option>
-                                    <option value='new'>New</option>
-                                    <option value='used'>Used</option>
-                                </select>
+    <option value=''>All</option>
+    <option value='locally used'>Locally Used</option>
+    <option value='fresh import'>Fresh Import</option>
+</select>
                             </div>
 
                             <div className='form-group'>

@@ -10,6 +10,16 @@ export const login = async (userData) => {
     return response.data
 }
 
+export const verifyEmail = async (data) => {
+    const response = await API.post('/auth/verify', data)
+    return response.data
+}
+
+export const resendCode = async (email) => {
+    const response = await API.post('/auth/resend-code', { email })
+    return response.data
+}
+
 export const getMe = async () => {
     const response = await API.get('/auth/me')
     return response.data

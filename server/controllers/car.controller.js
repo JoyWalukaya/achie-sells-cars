@@ -88,16 +88,20 @@ export const getCar = async (req, res) => {
 
         if (req.user) {
             await User.findByIdAndUpdate(req.user._id, {
+                $pull: { viewedCars: { car: car._id } }
+            })
+            await User.findByIdAndUpdate(req.user._id, {
                 $push: {
                     viewedCars: {
-                        $each: [{ car: car._id }],
+                        $each: [{ car: car._id, viewedAt: new Date() }],
                         $slice: -20
                     }
                 }
             })
         }
 
-        res.json(car)
+        const updatedCar = await Car.findById(req.params.id)
+        res.json(updatedCar)
 
     } catch (error) {
         res.status(500).json({ message: error.message })

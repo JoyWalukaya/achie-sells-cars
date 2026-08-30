@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { getCar, saveCar } from '../api/cars.js'
 import { useAuth } from '../context/AuthContext.jsx'
 import Loader from '../components/Loader.jsx'
+import { WHATSAPP, CALL , SITE_NAME } from '../config.js'
 
 const CarDetail = () => {
     const { id } = useParams()
@@ -13,19 +14,19 @@ const CarDetail = () => {
     const { isLoggedIn, isAdmin } = useAuth()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const fetchCar = async () => {
-            try {
-                const data = await getCar(id)
-                setCar(data)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setLoading(false)
-            }
+   useEffect(() => {
+    const fetchCar = async () => {
+        try {
+            const data = await getCar(id)
+            setCar(data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
         }
-        fetchCar()
-    }, [id])
+    }
+    fetchCar()
+}, [id])
 
     const handleSave = async () => {
         if (!isLoggedIn) return navigate('/login')
@@ -40,8 +41,8 @@ const CarDetail = () => {
     if (loading) return <Loader />
     if (!car) return <div className='page-container'>Car not found</div>
 
-    const whatsappMessage = `Hi, I'm interested in the ${car.year} ${car.make} ${car.model} you listed on Achie Sells Cars.`
-    const whatsappLink = `https://wa.me/254700000000?text=${encodeURIComponent(whatsappMessage)}`
+    const whatsappMessage = `Hi, I'm interested in the ${car.year} ${car.make} ${car.model} you listed on ${SITE_NAME}.`
+    const whatsappLink = `${WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}`
 
     const formatPrice = (price) => new Intl.NumberFormat('en-KE', {
         style: 'currency',
@@ -64,7 +65,7 @@ const CarDetail = () => {
                 onClick={() => navigate(-1)}
                 style={{ marginBottom: '1.5rem' }}
             >
-                Back
+                ← Back
             </button>
 
             <div className='car-detail-layout'>
@@ -95,30 +96,17 @@ const CarDetail = () => {
                     )}
 
                     {car.videoUrl && (
-                        <div className='car-detail-video'>
-                            <h3>Watch Video</h3>
-                            {videoId ? (
-                                <blockquote
-                                    className='tiktok-embed'
-                                    cite={car.videoUrl}
-                                    data-video-id={videoId}
-                                >
-                                    <a href={car.videoUrl} target='_blank' rel='noreferrer'>
-                                        Watch on TikTok
-                                    </a>
-                                </blockquote>
-                            ) : (
-                                
-                                 <a href={car.videoUrl}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    className='btn btn-secondary'
-                                >
-                                    Watch Video
-                                </a>
-                            )}
-                        </div>
-                    )}
+    <div className='car-detail-video'>
+        
+          <a  href={car.videoUrl}
+            target='_blank'
+            rel='noreferrer'
+            className='video-link'
+        >
+            ▶ Watch Video on TikTok
+        </a>
+    </div>
+)}
                 </div>
 
                 {/* RIGHT — Details */}
@@ -137,11 +125,16 @@ const CarDetail = () => {
 
                     <p className='car-detail-price'>{formatPrice(car.price)}</p>
 
+                    {/* STOCK — customers see In Stock/Sold Out, admin sees exact number */}
                     <div className='car-detail-stock'>
-                        {car.stock > 0 ? (
-                            <span style={{ color: '#2f9e44' }}>✓ {car.stock} in stock</span>
+                        {isAdmin ? (
+                            <span style={{ color: car.stock > 0 ? '#2f9e44' : '#c92a2a' }}>
+                                {car.stock > 0 ? `${car.stock} in stock` : 'Sold Out'}
+                            </span>
                         ) : (
-                            <span style={{ color: 'var(--text-light)' }}>Out of stock</span>
+                            <span style={{ color: car.stock > 0 ? '#2f9e44' : '#c92a2a' }}>
+                                {car.stock > 0 ? '✓ In Stock' : '✕ Sold Out'}
+                            </span>
                         )}
                     </div>
 
@@ -177,17 +170,15 @@ const CarDetail = () => {
                                 <span className='spec-value'>{car.transmission}</span>
                             </div>
                             <div className='spec-item'>
-                                <span className='spec-label'>Mileage</span>
-                                <span className='spec-value'>{car.mileage.toLocaleString()} km</span>
-                            </div>
-                            <div className='spec-item'>
                                 <span className='spec-label'>Color</span>
                                 <span className='spec-value'>{car.color}</span>
                             </div>
-                            <div className='spec-item'>
-                                <span className='spec-label'>Views</span>
-                                <span className='spec-value'>{car.views}</span>
-                            </div>
+                            {car.cc && (
+                                <div className='spec-item'>
+                                    <span className='spec-label'>Engine CC</span>
+                                    <span className='spec-value'>{car.cc} cc</span>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -198,20 +189,20 @@ const CarDetail = () => {
 
                     <div className='car-detail-actions'>
                         
-                          <a  href={whatsappLink}
+                           <a href={whatsappLink}
                             target='_blank'
                             rel='noreferrer'
                             className='btn btn-whatsapp'
                             style={{ flex: 1, textAlign: 'center', padding: '0.8rem' }}
                         >
-                            WhatsApp Inquiry
+                            💬 WhatsApp Inquiry
                         </a>
                         
-                           <a href='tel:+254700000000'
+                           <a href={CALL}
                             className='btn btn-call'
                             style={{ flex: 1, textAlign: 'center', padding: '0.8rem' }}
                         >
-                            Call Us
+                            📞 Call Us
                         </a>
                     </div>
 

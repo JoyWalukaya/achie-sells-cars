@@ -25,10 +25,10 @@ const carSchema = new mongoose.Schema({
         required: true
     },
     condition: {
-        type: String,
-        enum: ['new', 'used'],
-        required: true
-    },
+    type: String,
+    enum: ['locally used', 'fresh import'],
+    required: true
+},
     bodyType: {
         type: String,
         enum: ['sedan', 'suv', 'truck', 'coupe', 'hatchback', 'van', 'convertible'],
@@ -45,9 +45,13 @@ const carSchema = new mongoose.Schema({
         required: true
     },
     mileage: {
-        type: Number,
-        required: true
-    },
+    type: Number,
+    default: null
+},
+    cc: {
+    type: String,
+    trim: true
+},
     color: {
         type: String,
         required: true,
@@ -81,7 +85,7 @@ const carSchema = new mongoose.Schema({
         default: 0
     }
 }, {
-    timestamps: true
+    timestamps: true 
 })
 
 const Car = mongoose.model('Car', carSchema)

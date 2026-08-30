@@ -605,9 +605,27 @@ img {
 ================================ */
 .cars-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
     padding: 1rem 0;
+}
+
+@media (max-width: 1024px) {
+    .cars-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .cars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .cars-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ================================
@@ -666,16 +684,15 @@ img {
     letter-spacing: 0.05em;
 }
 
-.badge-new {
-    background-color: #2f9e44;
-    color: white;
-}
-
-.badge-used {
+.badge-locally-used {
     background-color: var(--blue-mid);
     color: white;
 }
 
+.badge-fresh-import {
+    background-color: #2f9e44;
+    color: white;
+}
 .car-card-save {
     position: absolute;
     top: 10px;
@@ -1393,4 +1410,258 @@ img {
     .contact-grid {
         grid-template-columns: 1fr;
     }
+}
+/* FOOTER SOCIALS */
+.footer-socials {
+    display: flex;
+    gap: 0.7rem;
+    margin-top: 1rem;
+}
+
+.footer-social {
+    width: 36px;
+    height: 36px;
+    background: rgba(180,214,227,0.1);
+    border: 10px solid rgba(180,214,227,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue-mid);
+    transition: all 0.25s ease;
+}
+
+.footer-social:hover {
+    background: var(--blue-mid);
+    color: white;
+    border-color: var(--blue-mid);
+    transform: translateY(-2px);
+}
+
+.footer-social svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ANALYTICS */
+.analytics-container {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+.analytics-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.analytics-stat {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 1.2rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.analytics-stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--blue-dark);
+}
+
+[data-theme='dark'] .analytics-stat-number {
+    color: var(--blue-light);
+}
+
+.analytics-stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.analytics-car-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.analytics-car-name {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.analytics-car-views {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+}
+
+.analytics-user-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.analytics-user-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.analytics-user-email {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.analytics-user-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.2rem;
+}
+
+.analytics-user-views {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+    .analytics-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.analytics-user-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid var(--border);
+}
+
+.analytics-user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+}
+
+.analytics-activity-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.analytics-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.analytics-activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.analytics-activity-car {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.analytics-activity-time {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+/* MODAL */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+}
+
+.modal h3 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+/* PASSWORD STRENGTH */
+.password-strength {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.strength-bars {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.strength-bar {
+    height: 4px;
+    flex: 1;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+/* PASSWORD FIELD */
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 3rem;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.3rem;
 }

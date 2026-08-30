@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useTheme } from '../context/ThemeContext.jsx'
 import logo from '../assets/logo.png'
+import { SITE_NAME } from '../config.js'
 
 const Navbar = ({ isHome }) => {
     const { isLoggedIn, isAdmin, user, logout } = useAuth()
@@ -20,7 +21,7 @@ const Navbar = ({ isHome }) => {
                     <Link to='/'>
                         <img
                             src={logo}
-                            alt='Achie Sells Cars'
+                            alt={SITE_NAME}
                             className='navbar-logo'
                         />
                     </Link>
@@ -46,8 +47,8 @@ const Navbar = ({ isHome }) => {
                     {isLoggedIn ? (
                         <>
                             <span className='navbar-greeting'>
-                                Hi, {user.name.split(' ')[0]}
-                            </span>
+                              Hi, {user?.name?.split(' ')[0]}
+                           </span>
                             {isAdmin && (
                                 <Link to='/admin' className='navbar-admin-btn'>
                                     Admin

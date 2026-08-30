@@ -9,6 +9,7 @@ import connectDB from './config/db.js'
 import { configureCloudinary } from './config/cloudinary.js'
 import authRoutes from './routes/auth.routes.js'
 import carRoutes from './routes/car.routes.js'
+import analyticsRoutes from './routes/analytics.routes.js'
 
 configureCloudinary()
 
@@ -31,8 +32,9 @@ app.use(cors())
 app.use(express.json())
 app.use(limiter)
 
-app.use('/api/auth', authLimiter, authRoutes)
+app.use('/api/auth', authRoutes)
 app.use('/api/cars', carRoutes)
+app.use('/api/analytics', analyticsRoutes)
 
 app.get('/', (req, res) => {
     res.send('Achie Sells Cars API is running!')

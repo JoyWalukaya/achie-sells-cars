@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { login as loginAPI, register as registerAPI, getMe } from '../api/auth.js'
+import { login as loginAPI, register as registerAPI } from '../api/auth.js'
 
 const AuthContext = createContext()
 
@@ -24,9 +24,12 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (userData) => {
         const data = await registerAPI(userData)
+        return data
+    }
+
+    const completeVerification = (data) => {
         setUser(data)
         localStorage.setItem('user', JSON.stringify(data))
-        return data
     }
 
     const logout = () => {
@@ -43,6 +46,7 @@ export const AuthProvider = ({ children }) => {
             loading,
             login,
             register,
+            completeVerification,
             logout,
             isAdmin,
             isLoggedIn

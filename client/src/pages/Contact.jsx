@@ -1,3 +1,4 @@
+import { WHATSAPP, CALL, PHONE_DISPLAY, TIKTOK,INSTAGRAM} from '../config.js'
 const Contact = () => {
     return (
         <div className='page-container'>
@@ -11,7 +12,7 @@ const Contact = () => {
 
                 <div className='contact-grid'>
                     {/* CALL */}
-                    <a href='tel:+254792504919' className='contact-card'>
+                    <a href={CALL} className='contact-card'>
                         <div className='contact-card-icon contact-icon-call'>
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -19,14 +20,14 @@ const Contact = () => {
                         </div>
                         <div className='contact-card-info'>
                             <h3>Call Us</h3>
-                            <p>+254 792 504 919</p>
+                            <p>{CALL}</p>
                             <span>Tap to call directly</span>
                         </div>
                     </a>
 
                     {/* WHATSAPP */}
                     
-                       <a href='https://wa.me/254792504919'
+                <a href= {WHATSAPP}
                         target='_blank'
                         rel='noreferrer'
                         className='contact-card'
@@ -38,14 +39,14 @@ const Contact = () => {
                         </div>
                         <div className='contact-card-info'>
                             <h3>WhatsApp</h3>
-                            <p>+254 792 504 919</p>
+                            <p>{CALL}</p>
                             <span>Chat with us on WhatsApp</span>
                         </div>
                     </a>
 
                     {/* TIKTOK */}
                     
-                      <a  href='https://www.tiktok.com/@simply_achie?is_from_webapp=1&sender_device=pc'
+                      <a  href={TIKTOK}
                         target='_blank'
                         rel='noreferrer'
                         className='contact-card'
@@ -64,7 +65,7 @@ const Contact = () => {
 
                     {/* INSTAGRAM */}
                     
-                     <a href='https://www.instagram.com/simply_achie/?utm_source=ig_web_button_share_sheet'
+                     <a href={INSTAGRAM}
                         target='_blank'
                         rel='noreferrer'
                         className='contact-card'

@@ -47,8 +47,21 @@ const userSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: true
-    }
-}, {
+    },
+    isVerified: {
+    type: Boolean,
+    default: false
+},
+verificationCode: {
+    type: String
+},
+verificationCodeExpires: {
+    type: Date
+},
+
+    
+}, 
+{
     timestamps: true
 })
 userSchema.pre('save', async function () {

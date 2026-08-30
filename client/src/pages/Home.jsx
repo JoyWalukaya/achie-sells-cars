@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import heroVideo from '../assets/hero.mp4'
+import { CALL, INSTAGRAM, TIKTOK, WHATSAPP } from '../config'
+import { SITE_NAME } from '../config.js'
 
 const Home = () => {
     const navigate = useNavigate()
@@ -20,7 +22,7 @@ const Home = () => {
 
             <div className='home-bottom'>
                 <div className='home-brand'>
-                    <h1 className='home-brand-name'>Achie Motors</h1>
+                    <h1 className='home-brand-name'>{SITE_NAME}</h1>
                     <p className='home-brand-tagline'>Luxury Cars. Exceptional Service.</p>
                 </div>
 
@@ -33,7 +35,7 @@ const Home = () => {
 
                 <div className='home-socials'>
                     
-                       <a href='https://www.tiktok.com/@simply_achie?is_from_webapp=1&sender_device=pc'
+                       <a href={TIKTOK}
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -44,7 +46,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                       <a href='https://www.instagram.com/simply_achie/?utm_source=ig_web_button_share_sheet'
+                       <a href={INSTAGRAM}
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -55,7 +57,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                       <a href='https://wa.me/254792504919'
+                       <a href={WHATSAPP}
                         target='_blank'
                         rel='noreferrer'
                         className='home-social'
@@ -66,7 +68,7 @@ const Home = () => {
                         </svg>
                     </a>
                     
-                       <a href='tel:+254792504919'
+                       <a href={CALL}
                         className='home-social'
                         title='Call Us'
                     >
