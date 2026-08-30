@@ -3,8 +3,7 @@
 A full-stack car dealership web application built for a real client.
 
 ## Live Demo
-Coming soon
-
+(https://magari-zetu.onrender.com)
 ## Features
 - Browse and search cars with advanced filters
 - Car detail pages with image gallery and TikTok video integration
