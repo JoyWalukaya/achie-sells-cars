@@ -1,6 +1,7 @@
+import bcrypt from 'bcryptjs'
 import User from '../models/user.model.js'
 import jwt from 'jsonwebtoken'
-import { sendVerificationEmail } from '../utils/sendEmail.js'
+import { sendVerificationEmail, sendPasswordResetEmail } from '../utils/sendEmail.js'
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -213,6 +214,87 @@ export const getMe = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('-password')
         res.json(user)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+export const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body
+
+        if (!email) {
+            return res.status(400).json({ message: 'Please enter your email' })
+        }
+
+        const user = await User.findOne({ email })
+
+        if (!user) {
+            return res.status(400).json({ message: 'No account found with this email' })
+        }
+
+        const code = generateCode()
+
+        await User.findByIdAndUpdate(user._id, {
+            resetPasswordCode: code,
+            resetPasswordExpires: new Date(Date.now() + 15 * 60 * 1000)
+        })
+
+        await sendPasswordResetEmail(email, user.name, code)
+
+        res.json({ message: 'Password reset code sent to your email', email })
+
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const resetPassword = async (req, res) => {
+    try {
+        const { email, code, newPassword } = req.body
+
+        if (!email || !code || !newPassword) {
+            return res.status(400).json({ message: 'Please fill in all fields' })
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/
+        if (!passwordRegex.test(newPassword)) {
+            return res.status(400).json({
+                message: 'Password must be at least 8 characters and include uppercase, lowercase, number and special character'
+            })
+        }
+
+        const user = await User.findOne({ email })
+
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' })
+        }
+
+        if (user.resetPasswordCode !== code.trim()) {
+            return res.status(400).json({ message: 'Invalid reset code' })
+        }
+
+        if (user.resetPasswordExpires < new Date()) {
+            return res.status(400).json({ message: 'Reset code has expired. Please request a new one.' })
+        }
+
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(newPassword, salt)
+
+        await User.findByIdAndUpdate(user._id, {
+            password: hashedPassword,
+            resetPasswordCode: null,
+            resetPasswordExpires: null,
+            isVerified: true
+        })
+
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            token: generateToken(user._id)
+        })
+
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

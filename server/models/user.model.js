@@ -58,7 +58,12 @@ verificationCode: {
 verificationCodeExpires: {
     type: Date
 },
-
+resetPasswordCode: {
+    type: String
+},
+resetPasswordExpires: {
+    type: Date
+},
     
 }, 
 {

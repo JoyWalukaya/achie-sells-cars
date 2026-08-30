@@ -4,7 +4,9 @@ import {
     loginUser,
     getMe,
     verifyEmail,
-    resendVerificationCode
+    resendVerificationCode,
+    forgotPassword,
+    resetPassword
 } from '../controllers/auth.controller.js'
 import { protect } from '../middleware/auth.middleware.js'
 
@@ -14,6 +16,8 @@ router.post('/register', registerUser)
 router.post('/login', loginUser)
 router.post('/verify', verifyEmail)
 router.post('/resend-code', resendVerificationCode)
+router.post('/forgot-password', forgotPassword)
+router.post('/reset-password', resetPassword)
 router.get('/me', protect, getMe)
 
 export default router
